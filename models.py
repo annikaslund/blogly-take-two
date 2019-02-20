@@ -21,9 +21,9 @@ class User(db.Model):
                     primary_key=True,
                     autoincrement=True)
     first_name = db.Column(db.String(30),
-                    nullable=False),
+                    nullable=False)
     last_name = db.Column(db.String(30),
-                    nullable=False),
+                    nullable=False)
     image_url = db.Column(db.String(200),
                     nullable=True,
                     default="https://www.top13.net/wp-content/uploads/2015/10/perfectly-timed-cat-photos-funny-cover.jpg")
