@@ -18,7 +18,14 @@ def redirect_to_home_page():
     return redirect('/users')
 
 @app.route('/users')
-def generate_user_page():
+def generate_users_page():
     """ Generates unordered list of links to users. """
+    users_data = User.query.all()
+    return render_template('users.html', users=users_data)
 
-    return render_template('users.html')
+
+@app.route('/users/<int:user_id>')
+def display_single_user(user_id):
+    """ Generates page for single user including photo """
+    user_data = User.query.get(user_id)
+    return render_template('user.html', user=user_data)
