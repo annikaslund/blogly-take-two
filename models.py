@@ -45,4 +45,20 @@ class Post(db.Model):
                     nullable=False)
     created_at = db.Column(db.DateTime,
                     nullable=False)
-    user_id = db.ForeignKey('users.id')
+    user_id = db.Column(db.Integer,
+                        db.ForeignKey('users.id'),
+                        nullable=False)
+
+
+class UserPost(db.Model):
+    """ User Posts """
+
+    __tablename__ = "user_posts"
+    
+    id = db.Column(db.Integer,
+                    primary_key=True,
+                    autoincrement=True)
+    user_id = db.Column(db.Integer,
+                    db.ForeignKey('users.id'))
+    post_id = db.Column(db.Integer,
+                    db.ForeignKey('posts.id'))

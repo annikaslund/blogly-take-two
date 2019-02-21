@@ -13,7 +13,7 @@ app.config['SQLALCHEMY_ECHO'] = True
 connect_db(app)
 
 debug = DebugToolbarExtension(app)
-# db.create_all()
+db.create_all()
 
 
 @app.route('/')
@@ -81,7 +81,7 @@ def save_edited_user(user_id):
 
     return redirect('/users')
 
- 
+
 @app.route('/users/<int:user_id>/delete', methods=["POST"])
 def delete_user(user_id):
     """Deletes user and redirects to main /users page"""
@@ -90,3 +90,24 @@ def delete_user(user_id):
     db.session.commit()
    
     return redirect('/users')
+
+
+@app.route('/users/<int:user_id>/posts/new')
+def show_new_post_form(user_id):
+    """ Shows a form to create a new post for an existing user. """
+    user = User.query.get(user_id)
+
+    
+    return render_template('create_post.html', user=user)
+
+@app.route('/users/<int:user_id>/posts', methods=["POST"])
+def add_new_post(user_id):
+    """ Adds new post to user page. """
+
+    user = User.query.get(user_id)
+    new_post = Post()
+
+    user.first_name = request.form['title-input']
+    user.last_name = request.form['content-input']
+
+    return redirect('/users/user.id')
