@@ -37,11 +37,17 @@ def show_create_user_form():
     return render_template('add_new_user.html')
 
 
-@app.route('/users/new', methods=["POST"])
+@app.route('/users', methods=["POST"])
 def submit_create_user_form():
     """Submit form to create a new user"""
-    new_user = User(first_name=request.form('first-name-input'), last_name=request.form('last-name-input'), image_url=request.form('img-url-input'))
+
+    first_name = request.form['first-name-input']
+    last_name = request.form['last-name-input']
+    image = request.form['img-url-input']
+
+    new_user = User(first_name=first_name, last_name=last_name, image_url=image)
+
     db.session.add(new_user)
     db.session.commit()
-    return redirect('/users')
 
+    return redirect('/users')
