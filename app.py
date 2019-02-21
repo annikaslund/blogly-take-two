@@ -17,6 +17,7 @@ def redirect_to_home_page():
     """ On home page request, redirects to /users. """
     return redirect('/users')
 
+
 @app.route('/users')
 def generate_users_page():
     """ Generates unordered list of links to users. """
@@ -28,7 +29,7 @@ def generate_users_page():
 def display_single_user(user_id):
     """ Generates page for single user including photo """
     user_data = User.query.get(user_id)
-    return render_template('user.html', profile_picture=user_data.image_url, first_name=user_data.first_name, last_name=user_data.last_name)
+    return render_template('user.html', user=user_data)
 
 
 @app.route('/users/new')
@@ -58,4 +59,4 @@ def show_edit_user_page(user_id):
     """ Show form to edit an existing user. """
     user_data = User.query.get(user_id)
 
-    return render_template('edit_user.html', first_name=user_data.first_name, last_name=user_data.last_name)
+    return render_template('edit_user.html', user=user_data)

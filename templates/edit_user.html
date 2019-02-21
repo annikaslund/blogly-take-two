@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    {{first_name}} {{last_name}}
+    {{user.first_name}} {{user.last_name}}
 {% endblock %}
 
 {% block content %}
@@ -10,15 +10,15 @@
         <form action="/users" method="POST">
         <label for="First Name">First Name</label>
         <div>
-            <input type="text" name="first-name-input" id="first-name-input">
+            <input type="text" name="first-name-input" value={{user.first_name}} id="first-name-input">
         </div>
         <label for="Last Name">Last Name</label>
         <div>
-            <input type="text" name="last-name-input" id="last-name-input">
+            <input type="text" name="last-name-input" value={{user.last_name}} id="last-name-input">
         </div>
         <label for="image url">Image URL</label>
         <div>
-            <input type="text" name="img-url-input" id="img-url-input">
+            <input type="text" name="img-url-input" value={{user.image_url}} id="img-url-input">
         </div>
         <button class="btn btn-success">Add</button>
         </form>

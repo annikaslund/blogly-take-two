@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
 {% block title %}
-        {{first_name}} {{last_name}}
+        {{user.first_name}} {{user.last_name}}
     {% endblock %}
 
     {% block content %}
-        <h1>{{first_name}} {{last_name}}</h1>
-        <button>Edit</button>
+        <h1>{{user.first_name}} {{user.last_name}}</h1>
+        <button><a href="/users/{{user.id}}/edit">Edit</a></button>
         <button>Delete</button>
-        <img src="{{profile_picture}}" alt="Wild Monkeys have attacked the server. Sorry!">
+        <img src="{{user.image_url}}" alt="Wild Monkeys have attacked the server. Sorry!">
     {% endblock %}
