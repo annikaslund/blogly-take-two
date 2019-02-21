@@ -28,4 +28,4 @@ def generate_users_page():
 def display_single_user(user_id):
     """ Generates page for single user including photo """
     user_data = User.query.get(user_id)
-    return render_template('user.html', user=user_data)
+    return render_template('user.html', profile_picture=user_data.image_url, first_name=user_data.first_name, last_name=user_data.last_name)
