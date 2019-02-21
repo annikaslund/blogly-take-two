@@ -51,3 +51,11 @@ def submit_create_user_form():
     db.session.commit()
 
     return redirect('/users')
+
+
+@app.route('/users/<int:user_id>/edit')
+def show_edit_user_page(user_id):
+    """ Show form to edit an existing user. """
+    user_data = User.query.get(user_id)
+
+    return render_template('edit_user.html', first_name=user_data.first_name, last_name=user_data.last_name)
