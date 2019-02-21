@@ -29,3 +29,19 @@ def display_single_user(user_id):
     """ Generates page for single user including photo """
     user_data = User.query.get(user_id)
     return render_template('user.html', profile_picture=user_data.image_url, first_name=user_data.first_name, last_name=user_data.last_name)
+
+
+@app.route('/users/new')
+def show_create_user_form():
+    """Show form to create a new user"""
+    return render_template('add_new_user.html')
+
+
+@app.route('/users/new', methods=["POST"])
+def submit_create_user_form():
+    """Submit form to create a new user"""
+    new_user = User(first_name=request.form('first-name-input'), last_name=request.form('last-name-input'), image_url=request.form('img-url-input'))
+    db.session.add(new_user)
+    db.session.commit()
+    return redirect('/users')
+
