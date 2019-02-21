@@ -26,4 +26,23 @@ class User(db.Model):
                     nullable=False)
     image_url = db.Column(db.String(200),
                     nullable=True,
-                    default="https://www.top13.net/wp-content/uploads/2015/10/perfectly-timed-cat-photos-funny-cover.jpg")
+                    default='https://www.top13.net/wp-content/uploads/2015/10/perfectly-timed-cat-photos-funny-cover.jpg')
+
+
+class Post(db.Model):
+    """ Post """ 
+
+    __tablename__ = "posts"
+    user = db.relationship('User', backref='posts')
+
+    id = db.Column(db.Integer,
+                    primary_key=True,
+                    autoincrement=True)
+    title = db.Column(db.String(50),
+                    nullable=True,
+                    default='Untitled')
+    content = db.Column(db.Text,
+                    nullable=False)
+    created_at = db.Column(db.DateTime,
+                    nullable=False)
+    user_id = db.ForeignKey('users.id')
