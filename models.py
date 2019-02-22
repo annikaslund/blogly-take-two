@@ -1,6 +1,7 @@
 """Models for Blogly."""
 
 from flask_sqlalchemy import SQLAlchemy
+import datetime
 
 db = SQLAlchemy()
 
@@ -10,6 +11,7 @@ def connect_db(app):
 
     db.app = app
     db.init_app(app)
+    db.DateTime
 
 
 class User(db.Model):
@@ -18,47 +20,45 @@ class User(db.Model):
     __tablename__ = "users"
 
     id = db.Column(db.Integer,
-                    primary_key=True,
-                    autoincrement=True)
-    first_name = db.Column(db.String(30),
-                    nullable=False)
-    last_name = db.Column(db.String(30),
-                    nullable=False)
+                   primary_key=True,
+                   autoincrement=True)
+    first_name = db.Column(db.String(30), nullable=False)
+    last_name = db.Column(db.String(30), nullable=False)
     image_url = db.Column(db.String(200),
-                    nullable=True,
-                    default='https://www.top13.net/wp-content/uploads/2015/10/perfectly-timed-cat-photos-funny-cover.jpg')
+                          nullable=True,
+                          default='https://www.top13.net/wp-content/uploads/2015/10/perfectly-timed-cat-photos-funny-cover.jpg')
 
 
 class Post(db.Model):
-    """ Post """ 
+    """ Post """
 
     __tablename__ = "posts"
     user = db.relationship('User', backref='posts')
 
     id = db.Column(db.Integer,
-                    primary_key=True,
-                    autoincrement=True)
+                   primary_key=True,
+                   autoincrement=True)
     title = db.Column(db.String(50),
-                    nullable=True,
-                    default='Untitled')
-    content = db.Column(db.Text,
-                    nullable=False)
+                      nullable=True,
+                      default='Untitled')
+    content = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime,
-                    nullable=False)
+                           nullable=False,
+                           default=datetime.datetime.now())
     user_id = db.Column(db.Integer,
                         db.ForeignKey('users.id'),
                         nullable=False)
 
 
-class UserPost(db.Model):
-    """ User Posts """
+# class UserPost(db.Model):
+#     """ User Posts """
 
-    __tablename__ = "user_posts"
+#     __tablename__ = "user_posts"
     
-    id = db.Column(db.Integer,
-                    primary_key=True,
-                    autoincrement=True)
-    user_id = db.Column(db.Integer,
-                    db.ForeignKey('users.id'))
-    post_id = db.Column(db.Integer,
-                    db.ForeignKey('posts.id'))
+#     id = db.Column(db.Integer,
+#                     primary_key=True,
+#                     autoincrement=True)
+#     user_id = db.Column(db.Integer,
+#                     db.ForeignKey('users.id'))
+#     post_id = db.Column(db.Integer,
+#                     db.ForeignKey('posts.id'))

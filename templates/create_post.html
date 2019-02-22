@@ -7,7 +7,7 @@
 {% block content %}
 <h1>Add post for {{ user.first_name }} {{ user.last_name }}</h1>
 <div>
-    <form action="/users/{{user.id}}" method="post">
+    <form action="/users/{{user.id}}/posts" method="post">
     <label for="Title">Title</label>
     <div>
         <input type="text" name="title-input" id="title-input">
