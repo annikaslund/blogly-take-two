@@ -10,11 +10,11 @@
     <form action="/users/{{user.id}}/posts" method="post">
     <label for="Title">Title</label>
     <div>
-        <input type="text" name="title-input" id="title-input">
+        <input type="text" name="title-input" id="title-input" required>
     </div>
     <label for="Content">Content</label>
     <div>
-        <input type="text" name="content-input" id="content-input">
+        <input type="text" name="content-input" id="content-input" required>
     </div>
     <button class="btn btn-success">Add</button>
     </form>

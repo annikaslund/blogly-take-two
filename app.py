@@ -48,7 +48,7 @@ def submit_create_user_form():
 
     first_name = request.form['first-name-input']
     last_name = request.form['last-name-input']
-    image = request.form['img-url-input']
+    image = request.form['img-url-input'] or None
 
     new_user = User(first_name=first_name,
                     last_name=last_name,
@@ -97,7 +97,6 @@ def show_new_post_form(user_id):
     """ Shows a form to create a new post for an existing user. """
     user = User.query.get(user_id)
 
-    
     return render_template('create_post.html', user=user)
 
 
@@ -115,4 +114,13 @@ def add_new_post(user_id):
     db.session.add(new_post)
     db.session.commit()
 
-    return redirect('/users/user_id')
+    return redirect(f'/users/{user_id}')
+
+
+@app.route('/posts/<int:post_id>')
+def show_post(post_id):
+    """ Function presents single post """
+
+    post = Post.query.get(post_id)
+
+    return render_template('post.html', post=post)
